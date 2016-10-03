@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-set -x
+#set -x
 
 # we use this instead of docker cp because cp is not guaranteed to be atomic,
 # and as a bonus we can keep track of the transfer with kill -USR1
