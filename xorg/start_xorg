@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# with xserver-xorg
+# /usr/bin/X :0 &
+
+sed -i "s/REPLACEME/${AIC_PLAYER_MAX_DIMENSION}/g" /home/developer/xorg.conf
+
+# with xserver-xorg-core
+/usr/bin/Xorg -config /home/developer/xorg.conf -ac -listen tcp -pn -noreset +extension GLX +extension RANDR +extension RENDER :0 &
+
+sleep 4
+
+xhost +player
+
+if [ "x$AIC_PLAYER_VNC_SECRET" = "x" ]; then
+    echo "Running x11vnc without password"
+    websockify 5900 --wrap-mode=ignore -- x11vnc -forever -shared -noxdamage -xrandr
+else
+    echo "Running x11vnc with a password"
+    websockify 5900 --wrap-mode=ignore -- x11vnc -forever -shared -noxdamage -xrandr -passwdfile "cmd:oathtool --totp $AIC_PLAYER_VNC_SECRET"
+fi
+

@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  xorg:
+    image: aic.xorg
+    build:
+      context: xorg
+    ports:
+      - 5900
+    environment:
+      - AIC_PLAYER_VNC_SECRET
+  ffserver:
+    image: aic.ffserver
+    build:
+      context: ffserver
+  adb:
+    image: aic.adb
+    build:
+      context: adb
+    environment:
+      - AIC_PLAYER_VM_HOST
+  avmdata:
+    image: aic.avmdata
+    build:
+      context: avmdata
+    volumes:
+      - /data/avm

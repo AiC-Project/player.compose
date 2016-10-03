@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  prjdata:
+    image: aic.prjdata
+    build:
+      context: prjdata
+
