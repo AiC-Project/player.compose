@@ -3,6 +3,7 @@ version: "2"
 services:
   xorg:
     container_name: "${AIC_AVM_PREFIX}xorg"
+    restart: unless-stopped
     image: aic.xorg
     ports:
       - 5900
@@ -10,9 +11,11 @@ services:
       - AIC_PLAYER_VNC_SECRET
   ffserver:
     container_name: "${AIC_AVM_PREFIX}ffserver"
+    restart: unless-stopped
     image: aic.ffserver
   adb:
     container_name: "${AIC_AVM_PREFIX}adb"
+    restart: unless-stopped
     image: aic.adb
     volumes_from:
       - container:${AIC_PROJECT_PREFIX}prjdata:ro
@@ -20,6 +23,7 @@ services:
       - AIC_PLAYER_VM_HOST
   sdl:
     container_name: "${AIC_AVM_PREFIX}sdl"
+    restart: unless-stopped
     image: aic.sdl
     volumes_from:
       - avmdata
@@ -43,6 +47,7 @@ services:
   audio:
     # command: tail -f /dev/null
     container_name: "${AIC_AVM_PREFIX}audio"
+    restart: unless-stopped
     image: aic.audio
     environment:
       - AIC_PLAYER_VM_HOST
@@ -51,6 +56,7 @@ services:
   sensors:
     # command: tail -f /dev/null
     container_name: "${AIC_AVM_PREFIX}sensors"
+    restart: unless-stopped
     image: aic.sensors
     environment:
       - AIC_PLAYER_AMQP_HOST
@@ -66,6 +72,7 @@ services:
   camera:
     # command: tail -f /dev/null
     container_name: "${AIC_AVM_PREFIX}camera"
+    restart: unless-stopped
     image: aic.camera
     environment:
       - AIC_PLAYER_AMQP_HOST
@@ -77,6 +84,7 @@ services:
       - container:${AIC_PROJECT_PREFIX}prjdata:ro
   avmdata:
     container_name: "${AIC_AVM_PREFIX}avmdata"
+    restart: unless-stopped
     image: aic.avmdata
     volumes:
       - /data/avm
