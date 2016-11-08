@@ -10,8 +10,6 @@ sed -i "s/REPLACEME/${AIC_PLAYER_MAX_DIMENSION}/g" /home/developer/xorg.conf
 
 sleep 4
 
-xhost +player
-
 if [ "x$AIC_PLAYER_VNC_SECRET" = "x" ]; then
     echo "Running x11vnc without password"
     websockify 5900 --wrap-mode=ignore -- x11vnc -forever -shared -noxdamage -xrandr
