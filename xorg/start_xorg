@@ -3,7 +3,11 @@
 # with xserver-xorg
 # /usr/bin/X :0 &
 
-sed -i "s/REPLACEME/${AIC_PLAYER_MAX_DIMENSION}/g" /home/developer/xorg.conf
+res=$(python /home/developer/select_res.py)
+width=$(echo $res | cut -d x -f 1)
+height=$(echo $res | cut -d x -f 2)
+sed -s -i "s/REPLACEME1/$res/" /home/developer/xorg.conf
+sed -s -i "s/REPLACEME2/$width $height/" /home/developer/xorg.conf
 
 # with xserver-xorg-core
 /usr/bin/Xorg -config /home/developer/xorg.conf -ac -listen tcp -pn -noreset +extension GLX +extension RANDR +extension RENDER :0 &
