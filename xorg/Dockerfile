@@ -21,6 +21,7 @@ RUN apt-get -y update && \
     mkdir /tmp/.X11-unix && chown root.root /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
 RUN useradd -m developer
+COPY ./select_res.py /home/developer/select_res.py
 COPY ./start_xorg /home/developer/start_xorg
 RUN chown -R developer.developer /home/developer
 COPY ./xorg.conf /home/developer/xorg.conf
